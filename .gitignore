@@ -481,3 +481,8 @@ gen### Gcov template
 #Output Folder for cmake
 build/
 cmake-build-debug/
+samples/AWSIOTUser/certs/
+samples/AWSIOTUser/config/
+
+#Lunar cfg
+lunar_cpp.cfg

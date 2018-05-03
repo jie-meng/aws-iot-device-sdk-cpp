@@ -1,0 +1,39 @@
+#pragma once
+
+#include "mqtt/Client.hpp"
+#include "NetworkConnection.hpp"
+
+namespace awsiotsdk {
+
+class IOTClient {
+protected:
+    std::shared_ptr<NetworkConnection> p_network_connection_;
+    std::shared_ptr<mqtt::ConnectPacket> p_connect_packet_;
+    std::atomic_int cur_pending_messages_;
+    std::atomic_int total_published_messages_;
+    std::shared_ptr<MqttClient> p_iot_client_;
+
+    ResponseCode RunPublish(int msg_count);
+    ResponseCode SubscribeCallback(util::String topic_name,
+                                   util::String payload,
+                                   std::shared_ptr<mqtt::SubscriptionHandlerContextData> p_app_handler_data);
+    ResponseCode DisconnectCallback(util::String topic_name,
+                                    std::shared_ptr<DisconnectCallbackContextData> p_app_handler_data);
+    ResponseCode ReconnectCallback(util::String client_id,
+                                   std::shared_ptr<ReconnectCallbackContextData> p_app_handler_data,
+                                   ResponseCode reconnect_result);
+    ResponseCode ResubscribeCallback(util::String client_id,
+                                     std::shared_ptr<ResubscribeCallbackContextData> p_app_handler_data,
+                                     ResponseCode resubscribe_result);
+    ResponseCode Subscribe();
+    ResponseCode Unsubscribe();
+    ResponseCode InitializeTLS();
+
+public:
+    static ResponseCode init(const util::String &config_file_path);
+    ResponseCode Connect();
+    ResponseCode Disconnect();
+    ResponseCode PublishAsync(const util::String &topic_name, const util::String &payload);
+};
+
+}
