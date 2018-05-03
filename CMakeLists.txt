@@ -162,7 +162,7 @@ add_subdirectory(tests/unit)
 
 add_subdirectory(samples/PubSub)
 
-add_subdirectory(samples/AWSIOTDevice)
+add_subdirectory(samples/IOTClient)
 
 add_subdirectory(samples/ShadowDelta)
 

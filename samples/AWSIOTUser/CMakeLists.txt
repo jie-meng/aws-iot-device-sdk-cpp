@@ -5,6 +5,6 @@ project(${APP_NAME})
 
 add_executable(${APP_NAME} main.cpp)
 
-find_library(AWS_IOT_DEVICE_WRAPPER aws-iot-device-wrapper HINTS ${PROJECT_SOURCE_DIR}/../AWSIOTDeviceWrapper)
+find_library(AWS_IOT_DEVICE aws-iot-device HINTS ${PROJECT_SOURCE_DIR}/../AWSIOTDevice)
 
-target_link_libraries(${APP_NAME} ${AWS_IOT_DEVICE_WRAPPER})
+target_link_libraries(${APP_NAME} ${AWS_IOT_DEVICE})

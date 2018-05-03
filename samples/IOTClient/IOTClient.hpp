@@ -30,6 +30,8 @@ protected:
     ResponseCode InitializeTLS();
 
 public:
+    static void startLogging();
+    static void stopLogging();
     static ResponseCode init(const util::String &config_file_path);
     ResponseCode Connect();
     ResponseCode Disconnect();

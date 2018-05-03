@@ -184,6 +184,17 @@ ResponseCode IOTClient::InitializeTLS() {
     return rc;
 }
 
+void IOTClient::startLogging()
+{
+    std::shared_ptr<awsiotsdk::util::Logging::ConsoleLogSystem> p_log_system = std::make_shared<awsiotsdk::util::Logging::ConsoleLogSystem>(awsiotsdk::util::Logging::LogLevel::Info);
+    awsiotsdk::util::Logging::InitializeAWSLogging(p_log_system);
+}
+
+void IOTClient::stopLogging()
+{
+    awsiotsdk::util::Logging::ShutdownAWSLogging();
+}
+
 ResponseCode IOTClient::init(const util::String &config_file_path)
 {
     return awsiotsdk::ConfigCommon::InitializeCommon(config_file_path);
