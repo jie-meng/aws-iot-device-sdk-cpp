@@ -24,5 +24,7 @@ else()
     find_library(SSL NAMES ssl HINTS ${OPENSSL_LIB_PATH})
     find_library(CRYPTO NAMES crypto HINTS ${OPENSSL_LIB_PATH})
 
-    target_link_libraries(${APP_NAME} ${SSL} ${CRYPTO} ${AWS_IOT_DEVICE} ${AWS_IOT_SDK} resolv)
+    SET (MYLIB -Wl,--whole-archive my_particular_lib -Wl,--no-whole-archive)
+
+    target_link_libraries(${APP_NAME} -Wl,-all_load ${AWS_IOT_DEVICE} ${AWS_IOT_SDK} -Wl,-noall_load ${SSL} ${CRYPTO} resolv)
 endif()
