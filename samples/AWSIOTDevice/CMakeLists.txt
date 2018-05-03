@@ -39,7 +39,11 @@ endif ()
 set(AWS_IOT_DEVICE_TARGET_NAME aws-iot-device)
 
 # Add Target
-add_library(${AWS_IOT_DEVICE_TARGET_NAME} SHARED "${PROJECT_SOURCE_DIR}/AWSIOTDevice.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
+if(WIN32)
+    add_library(${AWS_IOT_DEVICE_TARGET_NAME} SHARED "${PROJECT_SOURCE_DIR}/AWSIOTDevice.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
+else()
+    add_library(${AWS_IOT_DEVICE_TARGET_NAME} "${PROJECT_SOURCE_DIR}/AWSIOTDevice.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
+endif()
 
 # Add Target specific includes
 target_include_directories(${AWS_IOT_DEVICE_TARGET_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/../../common)

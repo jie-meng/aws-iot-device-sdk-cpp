@@ -5,13 +5,6 @@ project(${APP_NAME})
 
 add_executable(${APP_NAME} main.cpp)
 
-if(WIN32)
-    set(LIB_PATH ${PROJECT_SOURCE_DIR}/../../build/archive/Debug)
-else()
-    set(LIB_PATH ${PROJECT_SOURCE_DIR}/../../build/lib)
-endif()
+find_library(AWS_IOT_DEVICE_WRAPPER aws-iot-device-wrapper HINTS ${PROJECT_SOURCE_DIR}/../AWSIOTDeviceWrapper)
 
-find_library(AWS_IOT_DEVICE NAMES aws-iot-device HINTS ${LIB_PATH})
-find_library(AWS_IOT_SDK NAMES aws-iot-sdk-cpp HINTS ${LIB_PATH})
-
-target_link_libraries(${APP_NAME} ${AWS_IOT_DEVICE} ${AWS_IOT_SDK})
+target_link_libraries(${APP_NAME} ${AWS_IOT_DEVICE_WRAPPER})
