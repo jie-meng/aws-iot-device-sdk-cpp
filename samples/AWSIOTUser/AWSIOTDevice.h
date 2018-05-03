@@ -158,17 +158,31 @@ const int RESPONSE_CODE_DISCOVER_ACTION_REQUEST_OVERLOAD = -1104;               
 
 const int RESPONSE_CODE_DISCOVER_RESPONSE_UNEXPECTED_JSON_STRUCTURE_ERROR = -1200;  ///< Discover Response Json is missing expected keys
 
-void aws_iot_startLogging();
+#ifdef _WIN32
 
-void aws_iot_stopLogging();
+#ifdef DLL_EXPORT
+#define DLL_IMPORT_EXPORT  __declspec(dllexport)
+#else
+#define DLL_IMPORT_EXPORT  __declspec(dllimport)
+#endif
 
-int aws_iot_init(const char* config_file_path);
+#else
 
-int aws_iot_connect();
+#define DLL_IMPORT_EXPORT
 
-int aws_iot_disconnect();
+#endif
 
-int aws_iot_publish(const char* topic_name, const char* payload);
+DLL_IMPORT_EXPORT void aws_iot_startLogging();
+
+DLL_IMPORT_EXPORT void aws_iot_stopLogging();
+
+DLL_IMPORT_EXPORT int aws_iot_init(const char* config_file_path);
+
+DLL_IMPORT_EXPORT int aws_iot_connect();
+
+DLL_IMPORT_EXPORT int aws_iot_disconnect();
+
+DLL_IMPORT_EXPORT int aws_iot_publish(const char* topic_name, const char* payload);
 
 #ifdef __cplusplus
 }

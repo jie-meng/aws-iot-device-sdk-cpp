@@ -30,19 +30,16 @@ elseif (APPLE)
     set(CUSTOM_COMPILER_FLAGS "-fno-exceptions -Wall -Werror")
 elseif (WIN32)
     set(CUSTOM_COMPILER_FLAGS "/W4")
+    add_definitions(-DDLL_EXPORT)
 endif ()
 
 ################################
 # Target : Build AWSDevice #
 ################################
 set(AWS_IOT_DEVICE_TARGET_NAME aws-iot-device)
-# Add Target
-if(BUILD_SHARED_LIBRARY)
-    add_library(${AWS_IOT_DEVICE_TARGET_NAME} SHARED "${PROJECT_SOURCE_DIR}/AWSIOTDevice.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
-else()
-    add_library(${AWS_IOT_DEVICE_TARGET_NAME} "${PROJECT_SOURCE_DIR}/AWSIOTDevice.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
-endif()
 
+# Add Target
+add_library(${AWS_IOT_DEVICE_TARGET_NAME} SHARED "${PROJECT_SOURCE_DIR}/AWSIOTDevice.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
 
 # Add Target specific includes
 target_include_directories(${AWS_IOT_DEVICE_TARGET_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/../../common)
