@@ -39,11 +39,7 @@ endif ()
 set(IOT_CLIENT iot-client)
 
 # Add Target
-if(WIN32)
-    add_library(${IOT_CLIENT} SHARED "${PROJECT_SOURCE_DIR}/IOTClientWrapper.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
-else()
-    add_library(${IOT_CLIENT} "${PROJECT_SOURCE_DIR}/IOTClientWrapper.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
-endif()
+add_library(${IOT_CLIENT} "${PROJECT_SOURCE_DIR}/IOTClientWrapper.cpp;${PROJECT_SOURCE_DIR}/IOTClient.cpp;${PROJECT_SOURCE_DIR}/../../common/ConfigCommon.cpp")
 
 # Add Target specific includes
 target_include_directories(${IOT_CLIENT} PUBLIC ${PROJECT_SOURCE_DIR}/../../common)

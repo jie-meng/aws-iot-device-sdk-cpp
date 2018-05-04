@@ -6,7 +6,7 @@
 #include <utility>
 #include <exception>
 #include <iostream>
-#include "AWSIOTDevice.h"
+#include "../AWSIOTDevice/AWSIOTDevice.h"
 
 inline std::string getLine() { std::string str; std::getline(std::cin, str); return str; }
 
